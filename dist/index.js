@@ -31874,6 +31874,7 @@ async function run() {
         const octokit = github.getOctokit(token);
         console.log(JSON.stringify(pull_number));
         const eventName = github.context.eventName;
+        console.log(eventName);
         if (eventName === "pull_request") {
             console.log("Triggered by Pull Request");
         }

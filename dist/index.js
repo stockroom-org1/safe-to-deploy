@@ -31873,6 +31873,13 @@ async function run() {
         const pull_number = core.getInput("pull_request");
         const octokit = github.getOctokit(token);
         console.log(JSON.stringify(pull_number));
+        const eventName = github.context.eventName;
+        if (eventName === "pull_request") {
+            console.log("Triggered by Pull Request");
+        }
+        else if (eventName === "push") {
+            console.log("Triggered by Push");
+        }
         const branchObj = await octokit.request(`GET /repos/{owner}/{repo}/branches/{branch}`, { owner,
             repo,
             branch,

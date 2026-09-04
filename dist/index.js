@@ -31868,6 +31868,7 @@ async function run() {
         const repo = core.getInput("repository_name");
         const decision_mode = core.getInput("decision_mode");
         const branch = core.getInput("source_branch");
+        const businessId = core.getInput("businessId");
         const repository = core.getInput("repository");
         const artifacts_list = core.getInput("artifacts_list");
         const pull_number = core.getInput("pull_request");
@@ -31885,7 +31886,7 @@ async function run() {
                 "target": "Prod",
                 "scope": [
                     {
-                        "businessApplicationId": "",
+                        "businessApplicationId": businessId,
                         "businessApplicationVersion": "",
                         "assetSnapshotIds": artifacts_list.split(",")
                     }

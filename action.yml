@@ -12,6 +12,9 @@ inputs:
   github_token: 
     description: 'github_token is a token (provided by GitHub app via `github.event.client_payload.token`)'
     required: true
+  businessId:
+    description: 'github_token is a token (provided by GitHub app via `github.event.client_payload.token`)'
+    required: true
   artifacts_list:
     description: "Comma-separated list of artifacts to check for safe-to-deploy"
     required: true  

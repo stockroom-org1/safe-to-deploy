@@ -34,17 +34,17 @@ async function run() {
             };
             console.log("requestBody");
             console.log(JSON.stringify(requestBody ));
-        const response = await fetch("https://moocher-uproot-cobbler.ngrok-free.dev/api/v1/evaluate", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestBody)
-        });
+            const response = await fetch("https://moocher-uproot-cobbler.ngrok-free.dev/api/v1/evaluate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestBody)
+            });
+            core.setOutput("response", JSON.stringify(response));
         }
             
         
-        //core.setOutput("status", responseBody.verdict);
         core.setOutput("summary", `Repository: ${repository}\nArtifacts List: ${artifacts_list}`);
 
         

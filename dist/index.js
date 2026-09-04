@@ -31900,6 +31900,7 @@ async function run() {
                 },
                 body: JSON.stringify(requestBody)
             });
+            core.setOutput("response", JSON.stringify(response));
         }
         core.setOutput("summary", `Repository: ${repository}\nArtifacts List: ${artifacts_list}`);
     }

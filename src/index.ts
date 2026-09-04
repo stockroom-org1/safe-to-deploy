@@ -22,8 +22,8 @@ async function run() {
         }else if (eventName === "push"  || eventName === "workflow_dispatch") {
             console.log("Triggered by Push");
             const requestBody = {
-                "type": "hello",
-                "target": "target",
+                "type": "Deployment",
+                "target": "Prod",
                 "scope": [
                     {
                     "businessApplicationId": "",
@@ -41,6 +41,7 @@ async function run() {
                 },
                 body: JSON.stringify(requestBody)
             });
+            console.log(JSON.stringify(response));
             core.setOutput("response", JSON.stringify(response));
         }
             

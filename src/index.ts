@@ -41,8 +41,9 @@ async function run() {
                 },
                 body: JSON.stringify(requestBody)
             });
-            console.log(JSON.stringify(response));
-            core.setOutput("response", JSON.stringify(response));
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            core.setOutput("response", JSON.stringify(responseBody));
         }
             
         

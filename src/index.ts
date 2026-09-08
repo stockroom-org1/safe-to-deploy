@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
+import { Pull } from './pull';
 
 
 async function run() {
@@ -19,6 +20,7 @@ async function run() {
         console.log(eventName);
         if (eventName === "pull_request") {
             console.log("Triggered by Pull Request");
+            Pull.setFn(core, octokit, owner, repo, branch, artifacts_list, repository, decision_mode, pull_number, businessId);
 
         }else if (eventName === "push"  || eventName === "workflow_dispatch") {
             console.log("Triggered by Push");

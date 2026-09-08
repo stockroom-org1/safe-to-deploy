@@ -31906,6 +31906,17 @@ async function run() {
             const responseBody = await response.json();
             console.log(JSON.stringify(responseBody));
             core.setOutput("response", JSON.stringify(responseBody));
+            if (responseBody.result == "SAFE") {
+                core.info("Veracode Deply Decision: Allow");
+            }
+            else {
+                if (responseBody.verdict === "UNSAFE" && decision_mode === "observer") {
+                    core.info("Veracode Deply Decision: Observer Mode: Allow");
+                }
+                else {
+                    core.setFailed("Veracode Deploy Decision: Deny");
+                }
+            }
         }
         core.setOutput("summary", `Repository: ${repository}\nArtifacts List: ${artifacts_list}`);
     }

@@ -5,10 +5,10 @@ author: "Narayanan Chandran"
 inputs:
   vid:
     description: "Veracode API ID"
-    required: false
+    required: true
   vkey:
     description: "Veracode API Key"
-    required: false
+    required: true
   github_token: 
     description: 'github_token is a token (provided by GitHub app via `github.event.client_payload.token`)'
     required: true

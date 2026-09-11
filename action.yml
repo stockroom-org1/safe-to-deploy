@@ -13,10 +13,13 @@ inputs:
     description: 'github_token is a token (provided by GitHub app via `github.event.client_payload.token`)'
     required: true
   businessId:
-    description: 'github_token is a token (provided by GitHub app via `github.event.client_payload.token`)'
+    description: 'The UUID identifier of the Business Application'
+    required: true
+  businessVersion:
+    description: 'The version of the Business Application to be deployed. This will be stored on the Decision Record for reference later.'
     required: true
   artifacts_list:
-    description: "Comma-separated list of artifacts to check for safe-to-deploy"
+    description: "The UUID identifiers of all assets to be evaluated in the current request (Array of assetSnapshotIds). This will be stored on the Decision Record for reference later."
     required: true  
   decision_mode:
     description: "Block the deployment (enforcement mode) or record the verdict and continue (observer mode)"
@@ -39,7 +42,12 @@ inputs:
   pull_request:
     description: 'Pull request number'
     required: false
-  
+
+outputs:
+  conclusion:
+    description: 'Decision outcome - "success" (SAFE), "failure" (UNSAFE, enforcement mode), or "neutral" (UNSAFE, observer mode)'
+  summary:
+    description: 'Summary of the decision details'
 
 runs:
   using: node24

@@ -28,7 +28,7 @@ async function run() {
 
         }else if (eventName === "push"  || eventName === "workflow_dispatch" || true) {
             console.log("Triggered by Push");
-            const response = await getDecisionEvaluation(vid, vkey, {
+            const body = {
                 "type": "Deployment",
                 "target": "Prod",
                 "scope": [
@@ -39,8 +39,9 @@ async function run() {
                     }
                 ]
 
-            });
-
+            };
+            const response = await getDecisionEvaluation(vid, vkey, body);
+            console.log("Body: " + JSON.stringify(body));
             let conclusion = "failure";
             let summary = "";
 

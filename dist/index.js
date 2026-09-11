@@ -32120,7 +32120,7 @@ async function run() {
         }
         else if (eventName === "push" || eventName === "workflow_dispatch" || true) {
             console.log("Triggered by Push");
-            const response = await (0, decision_service_1.getDecisionEvaluation)(vid, vkey, {
+            const body = {
                 "type": "Deployment",
                 "target": "Prod",
                 "scope": [
@@ -32130,7 +32130,9 @@ async function run() {
                         "assetSnapshotIds": artifacts_list.split(",")
                     }
                 ]
-            });
+            };
+            const response = await (0, decision_service_1.getDecisionEvaluation)(vid, vkey, body);
+            console.log("Body: " + JSON.stringify(body));
             let conclusion = "failure";
             let summary = "";
             if ('result' in response && response.result === "SAFE") {

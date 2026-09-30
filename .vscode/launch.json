@@ -1,0 +1,38 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Safe to Deploy",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--enable-source-maps"
+      ],
+      "program": "${workspaceFolder}/node_modules/tsx/dist/cli.mjs",
+      "args": [
+        "${workspaceFolder}/src/index.ts"
+      ],
+      "env": {
+        "INPUT_VID": "----",
+        "INPUT_VKEY": "------",
+        "INPUT_GITHUB_TOKEN": "------",
+        "INPUT_ARTIFACTS_LIST": "stockroom-org1/stockroom-frontend@v0.0.2,stockroom-org1/stockroom-api@v0.0.2",
+        "INPUT_BUSINESSAPP": "stockroom-app",
+        //"INPUT_BUSINESSAPP": "nshah-sca-end-to-end-test-main",
+        //"INPUT_BUSINESSID": "660e8400-e29b-41d4-a716-446655440010",
+        "INPUT_BUSINESSVERSION": "1.4.0",
+        "INPUT_DECISION_MODE": "enforcement",
+        "INPUT_REPOSITORY_OWNER": "stockroom-org1",
+        "INPUT_REPOSITORY_NAME": "stockroom-deployment",
+        "INPUT_REPOSITORY": "stockroom-org1/stockroom-deployment",
+        "INPUT_SOURCE_BRANCH": "release/prod",
+        "INPUT_PULL_REQUEST": "15"
+      },
+      "sourceMaps": true,
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    }
+  ]
+}

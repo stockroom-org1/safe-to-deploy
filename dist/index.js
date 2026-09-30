@@ -32578,11 +32578,11 @@ async function processArtifactsList(input, octokit) {
     }));
 }
 async function getAssetSnapshotIds(vid, vkey, artifacts) {
-    const assetSnapshotIds = [];
+    let assetSnapshotIds = [];
     for (const artifact of artifacts) {
         const response = await (0, http_request_1.getRequestById)(vid, vkey, app_config_1.default.api.veracode.findingsUri, `/asset-snapshots`, [{ key: "metadataKey", value: "commitHash" }, { key: "metadataValue", value: artifact.commitHash || "" }, { key: "matchType", value: "EXACT" }]);
         if ("content" in response && response.content.length > 0) {
-            assetSnapshotIds.push(response.content[0].id);
+            assetSnapshotIds = response.content.map(item => item.id);
         }
         else {
             throw new Error(`Failed to fetch asset snapshot ID for ${artifact.name} with commit hash ${artifact.commitHash}`);

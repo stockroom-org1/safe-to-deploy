@@ -56,7 +56,7 @@ export async function getAssetSnapshotIds(vid: string, vkey: string, artifacts: 
 
         const response = await getRequestById<{ content: { id: string }[] }>(vid, vkey, appConfig.api.veracode.findingsUri, `/asset-snapshots`, [{key: "metadataKey", value: "commitHash"}, {key: "metadataValue", value: artifact.commitHash || ""}, {key: "matchType", value: "EXACT"}]);
         if ("content" in response && response.content.length > 0) {
-            assetSnapshotIds = response.content.map(item => item.id);
+            assetSnapshotIds.push(...response.content.map(item => item.id));
         } else {
             throw new Error(`Failed to fetch asset snapshot ID for ${artifact.name} with commit hash ${artifact.commitHash}`);
         }

@@ -51,16 +51,16 @@ export async function processArtifactsList(input: string, octokit: any): Promise
 }
 
 export async function getAssetSnapshotIds(vid: string, vkey: string, artifacts: Array<{ name: string; tag?: string; commitHash?: string }>): Promise<string[]> {
-    const assetSnapshotIds: string[] = [];
+    const assetSnapshotIdsSet = new Set<string>();
     for (const artifact of artifacts) {
 
         const response = await getRequestById<{ content: { id: string }[] }>(vid, vkey, appConfig.api.veracode.findingsUri, `/asset-snapshots`, [{key: "metadataKey", value: "commitHash"}, {key: "metadataValue", value: artifact.commitHash || ""}, {key: "matchType", value: "EXACT"}]);
         if ("content" in response && response.content.length > 0) {
-            assetSnapshotIds.push(response.content[0].id); // Assuming the first item is the relevant one
+            response.content.forEach(item => assetSnapshotIdsSet.add(item.id));
         } else {
             throw new Error(`Failed to fetch asset snapshot ID for ${artifact.name} with commit hash ${artifact.commitHash}`);
         }
     }
-    return assetSnapshotIds;
+    return [...assetSnapshotIdsSet];
 }
 

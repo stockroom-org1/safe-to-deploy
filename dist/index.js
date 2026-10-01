@@ -32337,7 +32337,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const appConfig = {
     hostName: {
         veracode: {
-            us: 'api.veracode.com',
+            us: 'api-agora-stage-107.stage.veracode.io',
             eu: 'api.veracode.eu'
         },
         github: 'api.github.com'
@@ -32578,17 +32578,17 @@ async function processArtifactsList(input, octokit) {
     }));
 }
 async function getAssetSnapshotIds(vid, vkey, artifacts) {
-    let assetSnapshotIds = [];
+    const assetSnapshotIdsSet = new Set();
     for (const artifact of artifacts) {
         const response = await (0, http_request_1.getRequestById)(vid, vkey, app_config_1.default.api.veracode.findingsUri, `/asset-snapshots`, [{ key: "metadataKey", value: "commitHash" }, { key: "metadataValue", value: artifact.commitHash || "" }, { key: "matchType", value: "EXACT" }]);
         if ("content" in response && response.content.length > 0) {
-            assetSnapshotIds.push(...response.content.map(item => item.id));
+            response.content.forEach(item => assetSnapshotIdsSet.add(item.id));
         }
         else {
             throw new Error(`Failed to fetch asset snapshot ID for ${artifact.name} with commit hash ${artifact.commitHash}`);
         }
     }
-    return assetSnapshotIds;
+    return [...assetSnapshotIdsSet];
 }
 
 

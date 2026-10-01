@@ -33,7 +33,7 @@ jobs:
       - name: ZIP source folder
         run: zip -r app.zip src package-lock.json
       - name: Run Veracode Policy scan
-        uses: veracode/veracode-uploadandscan-action@0.2.6
+        uses: veracode/veracode-uploadandscan-action@0.2.11
         with:
           appname: 'GitHub IaC_Secrets Action'
           createprofile: false
